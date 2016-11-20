@@ -1,0 +1,89 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/jquery-1.12.3.min.js"></script>
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <script>
+            function drawChart(num) {
+                var canvas=document.getElementById("canvas");
+                var cxt=canvas.getContext("2d");
+                cxt.beginPath();
+                //设置弧线的颜色为蓝色
+                cxt.strokeStyle = "gray";
+                var circle = {
+                    x : 100,    //圆心的x轴坐标值
+                    y : 100,    //圆心的y轴坐标值
+                    r : 50      //圆的半径
+                };
+                //沿着坐标点(100,100)为圆心、半径为50px的圆的逆时针方向绘制弧线
+                cxt.arc(circle.x, circle.y, circle.r, 10, Math.PI / 2, true);
+                cxt.fillStyle="#eeeeee";
+                cxt.fill();
+                //设置字体样式
+                cxt.font = "12px Courier New";
+                //设置字体填充颜色
+                cxt.fillStyle = "black";
+                //从坐标点(50,50)开始绘制文字
+                cxt.fillText("0", 40, 105);
+                cxt.fillText("0", 153, 105);
+                //按照指定的路径绘制弧线
+                cxt.stroke();
+                if(num>=50 && num<100){
+                    cxt.beginPath();
+                    cxt.moveTo(100,num);
+                    cxt.lineTo(50,100);
+                    cxt.lineTo(150,100);
+                    cxt.closePath();//填充或闭合 需要先闭合路径才能画
+                    cxt.fillStyle="red";
+                    cxt.fill();
+                }
+                else if(num>100 && num<=150) {
+                    var cxt2=canvas.getContext("2d");
+                    cxt.beginPath();
+                    cxt.moveTo(50,100);
+                    cxt.lineTo(150,100);
+                    cxt.lineTo(100,num);
+                    cxt.closePath();//填充或闭合 需要先闭合路径才能画
+                    cxt.fillStyle="blue";
+                    cxt.fill();
+                }
+                else if(num==100) {
+                    var cxt2=canvas.getContext("2d");
+                    cxt.beginPath();
+                    cxt.moveTo(50,100);
+                    cxt.lineTo(150,100);
+                    cxt.closePath();//填充或闭合 需要先闭合路径才能画
+                    cxt.lineWidth=1;
+                    cxt.stroke();
+
+                }
+            }
+
+            drawChart(100);//数值从50~99 为上半部分  ,101~150 为下半部分
+
+            </script>
+    </body>
+</html>
